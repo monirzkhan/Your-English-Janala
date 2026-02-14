@@ -45,19 +45,6 @@ const manageSpinners=(status)=>{
         document.getElementById('word-container').classList.remove('hidden');
     }
 }
-const loadlevelWord=(id)=>{
-    manageSpinners(true);
-    const url=`https://openapi.programming-hero.com/api/level/${id}`;
-    fetch(url)
-    .then(res=>res.json())
-    .then(data=>{
-    removeActive()
-    displayLevelWord(data.data)
-    const activeBtn=document.getElementById(`lesson-btn-${id}`);
-    activeBtn.classList.add('active');
-    })
-};
-
 
 const loadWordDetail=async (id)=>{
     const url=`https://openapi.programming-hero.com/api/word/${id}`;
@@ -101,6 +88,19 @@ wordDisplayCard.innerHTML=`
 document.getElementById('my_modal_5').showModal();
 
 }
+
+const loadlevelWord=(id)=>{
+    manageSpinners(true);
+    const url=`https://openapi.programming-hero.com/api/level/${id}`;
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>{
+    removeActive()
+    displayLevelWord(data.data)
+    const activeBtn=document.getElementById(`lesson-btn-${id}`);
+    activeBtn.classList.add('active');
+    })
+};
 
 const displayLevelWord=(words)=>{
  const wordContainer=document.getElementById('word-container');
@@ -155,7 +155,6 @@ levels.forEach(level => {
   <i class="fa-solid fa-book-open"></i>
       Lesson-${level.level_no}
 </button>
-
     `
   levelContainer.append(levelButton);  
 });
